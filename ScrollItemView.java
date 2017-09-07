@@ -26,7 +26,7 @@ public class ScrollItemView extends ViewGroup {
         super(context, attrs);
         mScroller = new Scroller(context);
         ViewConfiguration configuration = ViewConfiguration.get(context);
-        mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
+        mTouchSlop = configuration.getScaledTouchSlop();
     }
 
     @Override
