@@ -26,8 +26,18 @@ public class ToastUtil {
     private static LinearLayout getView(Context context) {
         Context appContext = context.getApplicationContext();
         LinearLayout layout = new LinearLayout(appContext);
+        int padding = (int) DisplayUtil.dip2px(12);
+        layout.setPadding(padding, padding, padding, padding);
+        layout.setBackgroundResource(R.drawable.toast_bg);
+        layout.setOrientation(LinearLayout.HORIZONTAL);
+        layout.setGravity(Gravity.CENTER_VERTICAL);
         TextView textView = new TextView(appContext);
         ImageView imageView = new ImageView(appContext);
+        imageView.setVisibility(View.GONE);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(0, 0, padding, 0);
+        imageView.setLayoutParams(lp);
+        textView.setTextColor(Color.WHITE);
         layout.addView(imageView);
         layout.addView(textView);
         return layout;
@@ -56,6 +66,14 @@ public class ToastUtil {
         mToast.setDuration(duration);
         mToast.setView(toastView);
         mToast.show();
+    }
+
+    public static void showDrawable(Context context, int resId, String text) {
+        showToastWithDrawable(context, text, resId, Toast.LENGTH_SHORT);
+    }
+
+    public static void showDrawable(Context context, int resId, int stringResId) {
+        showToastWithDrawable(context, context.getString(stringResId), resId, Toast.LENGTH_SHORT);
     }
 
     /**
